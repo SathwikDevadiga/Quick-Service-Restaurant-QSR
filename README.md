@@ -21,7 +21,7 @@ It helps manage menu items, take orders, and analyze sales — all via RESTful e
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
+git clone https://github.com/SathwikDevadiga/Quick-Service-Restaurant-QSR.git
 cd quickbite
 
 # Create virtual environment (optional)
