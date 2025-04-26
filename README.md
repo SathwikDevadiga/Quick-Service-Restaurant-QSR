@@ -126,14 +126,6 @@ Use it to:
 
 ---
 
-## 📬 API Tips
-
-- All responses are in JSON.
-- For testing, use tools like Postman, Insomnia, or `curl`.
-- Browsable API is optional — set `renderer_classes = [JSONRenderer]` in views for clean API-only experience.
-
----
-
 
 ## 📄 License
 
