@@ -92,9 +92,9 @@ Use it to:
 | GET    | /orders/                               | List all orders                     |
 | GET    | /orders/?status=pending                | Filter orders by status             |
 | POST   | /orders/                               | Place a new order                   |
-| GET    | /orders/<id>                           | Retrieve order details              |
-| PUT    | /orders/<id>  	                  | Update order details                |		
-| DELETE | /orders/<id>                           | Delete order details                |
+| GET    | /orders/<id>/                           | Retrieve order details              |
+| PUT    | /orders/<id>/  	                  | Update order details                |		
+| DELETE | /orders/<id>/                           | Delete order details                |
 | GET    | /orders/average-daily-sales/           | Daily average revenue (last 4 weekdays) |
 
 #### 🔁 Place Order Sample Payload:
