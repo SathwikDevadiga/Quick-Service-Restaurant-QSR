@@ -59,29 +59,29 @@ Use it to:
 | Method | Endpoint                      | Description                        |
 |--------|-------------------------------|------------------------------------|
 | GET    | /menu_items/                  | List all menu items                |
-| GET    | /menu_items/<id>/             | Retrieve a specific menu item      |
+| GET    | /menu_items/{id}/             | Retrieve a specific menu item      |
 | GET    | /menu_items/available/        | List available menu items only     |
 | POST   | /menu_items/                  | Create menu items		      |
-| DELETE | /menu_items/<id>/             | Delete a specific menu item        |
+| DELETE | /menu_items/{id}/             | Delete a specific menu item        |
 
 #### 🔁 Place Order Sample Payload:
 {
     "name" : "Burger",
     "price" : 120.00,
     "availability" : True
-}
+},
 
 {
     "name" : "Pizza",
     "price" : 180.00,
     "availability" : True
-}
+},
 
 {
     "name" : "momos",
     "price" : 150.00,
     "availability" : False
-}
+},
 
 ---
 
@@ -92,9 +92,9 @@ Use it to:
 | GET    | /orders/                               | List all orders                     |
 | GET    | /orders/?status=pending                | Filter orders by status             |
 | POST   | /orders/                               | Place a new order                   |
-| GET    | /orders/<id>/                           | Retrieve order details              |
-| PUT    | /orders/<id>/  	                  | Update order details                |		
-| DELETE | /orders/<id>/                           | Delete order details                |
+| GET    | /orders/{id}/                          | Retrieve order details              |
+| PUT    | /orders/{id}/  	                      | Update order details                |		
+| DELETE | /orders/{id}/                          | Delete order details                |
 | GET    | /orders/average-daily-sales/           | Daily average revenue (last 4 weekdays) |
 
 #### 🔁 Place Order Sample Payload:
