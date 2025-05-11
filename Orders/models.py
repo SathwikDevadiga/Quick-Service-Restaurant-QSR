@@ -1,6 +1,10 @@
 from django.db import models
 from MenuItems.models import MenuItem
 import uuid as uuid_lib
+from authentication.models import CustomUser
+
+
+    
 
 class Order(models.Model):
     STATUS_CHOICES = [
@@ -8,7 +12,7 @@ class Order(models.Model):
         ('in_progress', 'In Progress'),
         ('completed', 'Completed'),
     ]
-
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,default=None)
     id = models.UUIDField(primary_key=True, default=uuid_lib.uuid4, editable=False)
     timestamp = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
