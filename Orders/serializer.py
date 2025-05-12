@@ -15,7 +15,7 @@ class OrderSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Order
-        fields = ('id','user','timestamp', 'status', 'order_items','total_price',)
+        fields = ('id','user','timestamp', 'status', 'order_items','total_price')
 
 
 
@@ -23,7 +23,7 @@ class OrderCreateSerializer(serializers.ModelSerializer):
     class OrderItemSerializer(serializers.ModelSerializer):
         class Meta:
             model = OrderItem
-            fields = ('menu_item', 'quantity')
+            fields = ('menu_item', 'quantity', 'item_subtotal')
     order_items = OrderItemSerializer(many=True)
 
     def create(self, validated_data):
@@ -31,6 +31,8 @@ class OrderCreateSerializer(serializers.ModelSerializer):
         if not order_items_data:
             raise serializers.ValidationError("At least one order item is required.")
         
+        user = self.context['request'].user
+
         unavailable_items = []
         for item_data in order_items_data:
             menu_item = item_data['menu_item']
@@ -43,7 +45,7 @@ class OrderCreateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({
                 "unavailable_items": f"The following items are unavailable: {', '.join(unavailable_items)}"
             })
-        order = Order.objects.create(**validated_data)
+        order = Order.objects.create(user=user,**validated_data)
         for item_data in order_items_data:
             
             OrderItem.objects.create(order=order, **item_data)
