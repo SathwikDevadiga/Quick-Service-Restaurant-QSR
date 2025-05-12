@@ -4,8 +4,8 @@ from django.contrib import admin
 from .models import CustomUser
 
 class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'username', 'email', 'phone_number', 'address','password', 'is_staff', 'is_active')
+    list_display = ('id', 'username', 'email', 'phone_number', 'address','password')
     search_fields = ('username', 'email')
-    list_filter = ('is_staff', 'is_active')
+    
 
 admin.site.register(CustomUser, CustomUserAdmin)

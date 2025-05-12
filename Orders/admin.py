@@ -5,6 +5,7 @@ from OrderItems.models import OrderItem
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
     extra = 0
+    fields = ['menu_item', 'quantity']
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
@@ -12,4 +13,3 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ['status', 'timestamp']
     list_editable = ['status']
     inlines = [OrderItemInline]
-    ordering = ['-timestamp']
