@@ -60,11 +60,11 @@ Use it to:
 
 | Method | Endpoint                | Description                    |
 | ------ | ----------------------- | ------------------------------ |
-| GET    | /menu\_items/           | List all menu items            |
-| GET    | /menu\_items/{id}/      | Retrieve a specific menu item  |
-| GET    | /menu\_items/available/ | List available menu items only |
-| POST   | /menu\_items/           | Create menu items              |
-| DELETE | /menu\_items/{id}/      | Delete a specific menu item    |
+| GET    | /menu_items/           | List all menu items            |
+| GET    | /menu_items/{id}/      | Retrieve a specific menu item  |
+| GET    | /menu_items/available/ | List available menu items only |
+| POST   | /menu_items/           | Create menu items              |
+| DELETE | /menu_items/{id}/      | Delete a specific menu item    |
 
 #### 🔁 Sample Payload:
 
@@ -117,12 +117,25 @@ Use it to:
 | Method | Endpoint                 | Description                         |
 | ------ | ------------------------ | ----------------------------------- |
 | GET    | /auth/                   | List all users (admin only)         |
+| POST   | /auth/                   | Create user                         |
 | GET    | /auth/{id}/              | Retrieve a specific user            |
 | POST   | /auth/api/token/         | Obtain JWT access and refresh token |
 | POST   | /auth/api/token/refresh/ | Refresh JWT access token            |
 
-#### 🔐 Token Obtain Example
+#### 🔐 Create User Example
+```json
+POST /auth/api/token/
+    {
+        "id": 5,
+        "username": "khushi",
+        "email": "khushi@example.com",
+        "password": "12345",
+        "phone_number": "7028252987",
+        "address": "A-308  Vinayak C.H.S"
+    }
+```
 
+#### 🔐 Token Obtain Example
 ```json
 POST /auth/api/token/
 {
@@ -164,6 +177,7 @@ Visit [`/silk/`](http://127.0.0.1:8000/silk/) after making API requests.
 ## ⚠️ Features & Rules
 
 * ✅ Prevents placing orders with **unavailable** items
+* ✅ .env file for handling secrete keys
 * ✅ Supports **filtering orders** by status
 * ✅ Admin interface for full data management
 * ✅ Calculates **average daily sales** for last 4 weekdays
