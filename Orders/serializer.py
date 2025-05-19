@@ -6,7 +6,7 @@ from OrderItems.serializer import OrderItemSerializer
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    order_items = OrderItemSerializer(many=True, read_only=True)  # ✅ match the related_name
+    order_items = OrderItemSerializer(many=True, read_only=True)  
     total_price = serializers.SerializerMethodField(method_name='total')
 
     def total(self, obj):

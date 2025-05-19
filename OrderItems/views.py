@@ -6,7 +6,7 @@ from .serializer import OrderItemSerializer
 # Create your views here.
 
 class OrderItemsDetails(generics.ListCreateAPIView):
-    queryset = OrderItem.objects.all()
+    queryset = OrderItem.objects.select_related('menu_item').all()
     serializer_class = OrderItemSerializer
     permission_classes = [permissions.IsAuthenticated]
 

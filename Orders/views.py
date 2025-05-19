@@ -37,12 +37,7 @@ class AverageDailySalesView(APIView):
             day = today - timedelta(days=i)
             if day.weekday() < 5:  # Monday to Friday
                 orders = Order.objects.filter(status='completed', timestamp__date=day)
-                order_items = OrderItem.objects.filter(order__in=orders)
-
-                total = sum(
-                    item.menu_item.price * item.quantity
-                    for item in order_items
-                )
+                total = sum(order.get_total() for order in orders)
                 data[str(day)] = total
                 if len(data) == 4:
                     break
