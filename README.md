@@ -14,6 +14,9 @@ It helps manage menu items, take orders, analyze sales, and authenticate users v
 * SQLite (default)
 
 ---
+## Base URL
+
+`http://127.0.0.1:8000/`
 
 ## 🚀 Getting Started
 
