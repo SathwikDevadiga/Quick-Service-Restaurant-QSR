@@ -40,7 +40,6 @@ DB_NAME=quickbite_db
 DB_USER=root
 DB_PASSWORD=root
 
-
 # Apply migrations
 python manage.py makemigrations
 python manage.py migrate
