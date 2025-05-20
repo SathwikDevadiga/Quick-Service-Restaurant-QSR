@@ -31,7 +31,15 @@ source env/bin/activate  # On Windows: env\Scripts\activate
 # Install dependencies
 pip install -r requirements.txt
 
+#Configure the Database
+Update your .env file with the following values:
+DB_NAME=quickbite_db
+DB_USER=root
+DB_PASSWORD=root
+
+
 # Apply migrations
+python manage.py makemigrations
 python manage.py migrate
 
 # Create superuser (for Django admin)
