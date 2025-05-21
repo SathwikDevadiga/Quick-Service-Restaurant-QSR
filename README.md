@@ -36,9 +36,9 @@ pip install -r requirements.txt
 
 #Configure the Database
 Update your .env file with the following values:
-DB_NAME=quickbite_db
-DB_USER=root
-DB_PASSWORD=root
+DB_NAME={database_name}
+DB_USER={databse_user}
+DB_PASSWORD={database_password}
 
 # Apply migrations
 python manage.py makemigrations
