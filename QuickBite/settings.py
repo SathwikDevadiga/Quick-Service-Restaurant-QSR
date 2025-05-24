@@ -39,19 +39,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
     'rest_framework',
-    'silk',
     'drf_spectacular',
     'rest_framework_simplejwt',
     'MenuItems',
     'Orders',
     'OrderItems',
     'authentication',
-    "debug_toolbar",
+    'silk',
     'django_filters',
     
-
+    
 ]
 
 MIDDLEWARE = [
@@ -62,8 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'silk.middleware.SilkyMiddleware',
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    'silk.middleware.SilkyMiddleware'
 ]
 
 ROOT_URLCONF = 'QuickBite.urls'
@@ -148,12 +145,6 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-INTERNAL_IPS = [
-    # ...
-    "127.0.0.1",
-    # ...
-]
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -178,3 +169,11 @@ SIMPLE_JWT = {
     'SIGNING_KEY': SECRET_KEY,
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'devadiga.sathwik81544@gmail.com'  # your email-id
+EMAIL_HOST_PASSWORD = 'icqp lgfv ncyc wbnm' #password associated with above email-id (not the regular password)

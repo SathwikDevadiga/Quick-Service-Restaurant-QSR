@@ -1,6 +1,11 @@
 from django.apps import AppConfig
 
 
-class OrdersConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'Orders'
+from django.dispatch import Signal
+
+# Define a custom signal
+order_created = Signal()
+
+# orders/apps.py
+
+

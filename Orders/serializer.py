@@ -3,6 +3,8 @@ from .models import Order
 from OrderItems.models import OrderItem
 from MenuItems.models import MenuItem
 from OrderItems.serializer import OrderItemSerializer
+from .signals import order_created
+
 
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -50,6 +52,7 @@ class OrderCreateSerializer(serializers.ModelSerializer):
             
             OrderItem.objects.create(order=order, **item_data)
 
+        order_created.send(sender=Order, order=order)
         return order
 
     class Meta:
