@@ -14,6 +14,7 @@ It helps manage menu items, take orders, analyze sales, and authenticate users v
 * SQLite (default)
 
 ---
+
 ## Base URL
 
 `http://127.0.0.1:8000/`
@@ -34,14 +35,14 @@ source env/bin/activate  # On Windows: env\Scripts\activate
 # Install dependencies
 pip install -r requirements.txt
 
-#Configure the Database
-Update your .env file with the following values:
+# Configure the Database
+# Update your .env file with the following values:
 DB_NAME={database_name}
-DB_USER={databse_user}
+DB_USER={database_user}
 DB_PASSWORD={database_password}
 
-email = {your-email}
-email_password = {your app password} ref = https://www.geeksforgeeks.org/setup-sending-email-in-django-project/
+EMAIL_HOST_USER={your-email}
+EMAIL_HOST_PASSWORD={your-app-password}
 
 # Apply migrations
 python manage.py makemigrations
@@ -58,7 +59,7 @@ python manage.py runserver
 
 ## 🔐 Django Admin
 
-Visit: [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+Visit: [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)  
 Use it to:
 
 * Manage `MenuItems`
@@ -135,68 +136,62 @@ Use it to:
 | POST   | /auth/api/token/         | Obtain JWT access and refresh token |
 | POST   | /auth/api/token/refresh/ | Refresh JWT access token            |
 
-#### 🔐 Create User Example
-```json
-POST /auth/api/token/
-    {
-        "id": 5,
-        "username": "khushi",
-        "email": "khushi@example.com",
-        "password": "12345",
-        "phone_number": "7028252987",
-        "address": "A-308  Vinayak C.H.S"
-    }
-```
+---
 
-#### 🔐 Token Obtain Example
-```json
-POST /auth/api/token/
-{
-  "email": "user@example.com",
-  "password": "yourpassword"
-}
-```
+## 📬 Email Notifications via Signals
 
-#### 🔁 Response
+The system uses **Django custom signals** to send an order confirmation email after an order and its items are saved.
 
-```json
-{
-  "refresh": "your-refresh-token",
-  "access": "your-access-token"
-}
-```
+### ✉️ Setup
+
+- Add to `.env`:
+  ```
+  EMAIL_HOST_USER=your_email@gmail.com
+  EMAIL_HOST_PASSWORD=your_app_password
+  ```
+
+- Add to `settings.py`:
+  ```python
+  EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+  EMAIL_HOST = 'smtp.gmail.com'
+  EMAIL_PORT = 587
+  EMAIL_USE_TLS = True
+  EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+  EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+  ```
+
+- Define a custom signal `order_created` and connect it to a receiver that sends an email with order details.
+
+- Trigger `order_created.send(sender=Order, order=order)` **after saving** the order and its items.
+
+- refrence for email part : https://www.geeksforgeeks.org/setup-sending-email-in-django-project/
 
 ---
 
 ## 📊 API Documentation
 
-Interactive docs are available at:
-
 * **Swagger UI**: [`/api/schema/swagger-ui/`](http://127.0.0.1:8000/api/schema/swagger-ui/)
 * **ReDoc**: [`/api/schema/redoc/`](http://127.0.0.1:8000/api/schema/redoc/)
 * **Schema**: [`/api/schema/`](http://127.0.0.1:8000/api/schema/)
-
-Generated using `drf-spectacular`.
 
 ---
 
 ## ⚙️ Performance Profiling
 
-`drf-silk` is enabled to help you analyze and optimize your API performance.
-Visit [`/silk/`](http://127.0.0.1:8000/silk/) after making API requests.
+`drf-silk` is enabled. Visit [`/silk/`](http://127.0.0.1:8000/silk/) after making API requests to view performance metrics.
 
 ---
 
 ## ⚠️ Features & Rules
 
-* ✅ Prevents placing orders with **unavailable** items
-* ✅ .env file for handling secrete keys
-* ✅ Supports **filtering orders** by status
-* ✅ Admin interface for full data management
-* ✅ Calculates **average daily sales** for last 4 weekdays
-* ✅ JWT-based **authentication** and **authorization**
-* ✅ Clean **interactive API documentation**
-* ✅ Route performance profiling via `drf-silk`
+* Prevents placing orders with unavailable items
+* Environment-based secret management (`.env`)
+* Filter orders by status
+* Admin panel for full data control
+* Daily sales analytics (last 4 weekdays)
+* JWT authentication
+* Swagger + ReDoc API docs
+* drf-silk profiling
 
 ---
 
