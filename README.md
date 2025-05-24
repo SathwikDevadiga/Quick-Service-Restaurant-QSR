@@ -40,6 +40,9 @@ DB_NAME={database_name}
 DB_USER={databse_user}
 DB_PASSWORD={database_password}
 
+email = {your-email}
+email_password = {your app password} ref = https://www.geeksforgeeks.org/setup-sending-email-in-django-project/
+
 # Apply migrations
 python manage.py makemigrations
 python manage.py migrate
