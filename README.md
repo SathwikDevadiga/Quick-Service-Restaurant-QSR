@@ -14,6 +14,9 @@ It helps manage menu items, take orders, analyze sales, and authenticate users v
 * SQLite (default)
 
 ---
+## Base URL
+
+`http://127.0.0.1:8000/`
 
 ## 🚀 Getting Started
 
@@ -31,7 +34,14 @@ source env/bin/activate  # On Windows: env\Scripts\activate
 # Install dependencies
 pip install -r requirements.txt
 
+#Configure the Database
+Update your .env file with the following values:
+DB_NAME={database_name}
+DB_USER={databse_user}
+DB_PASSWORD={database_password}
+
 # Apply migrations
+python manage.py makemigrations
 python manage.py migrate
 
 # Create superuser (for Django admin)
