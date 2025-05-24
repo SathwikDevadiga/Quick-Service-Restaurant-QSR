@@ -11,7 +11,7 @@ It helps manage menu items, take orders, analyze sales, and authenticate users v
 * Django REST Framework (DRF)
 * drf-spectacular (for API schema and Swagger docs)
 * drf-silk (for performance profiling)
-* SQLite (default)
+* PostgreSQL
 
 ---
 
