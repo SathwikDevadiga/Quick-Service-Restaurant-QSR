@@ -1,7 +1,7 @@
 # 🍔 QuickBite POS Backend
 
 A Django REST API backend for QuickBite, a Quick Service Restaurant (QSR) Point of Sale (POS) system.
-It helps manage menu items, take orders, analyze sales, and authenticate users via JWT.
+It helps manage menu items, take orders, analyze sales,caching with redis and authenticate users via JWT.
 
 ---
 
@@ -9,9 +9,8 @@ It helps manage menu items, take orders, analyze sales, and authenticate users v
 
 * Django
 * Django REST Framework (DRF)
-* drf-spectacular (for API schema and Swagger docs)
-* drf-silk (for performance profiling)
 * PostgreSQL
+* Redis
 
 ---
 
