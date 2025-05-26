@@ -8,4 +8,5 @@ def invalidate_menu_cache(sender, instance, **kwargs):
     """
     Invalidate the cache for the menu list when a MenuItem is created or updated.
     """
-    cache.delete('menu_list')
+
+    cache.delete_pattern('*menu_list*')
