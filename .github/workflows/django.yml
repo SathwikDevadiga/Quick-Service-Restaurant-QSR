@@ -1,65 +1,69 @@
-name: Django CI
+name: Django CI with Docker
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  build:
-
+  django-ci:
     runs-on: ubuntu-latest
 
     services:
       postgres:
-        image: postgres:14
+        image: postgres:17
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: quickbite
+          POSTGRES_DB: quickbites_test
+          POSTGRES_USER: testuser
+          POSTGRES_PASSWORD: testpass
         ports:
           - 5432:5432
         options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+          --health-cmd="pg_isready -U testuser -d quickbites_test"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
 
     env:
-      DB_NAME: quickbite
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      DB_HOST: localhost
-      DB_PORT: 5432
-      SECRET_KEY: django-insecure-fake-key
-      DEBUG: true
+      DB_NAME: quickbites_test
+      DB_USER: testuser
+      DB_PASSWORD: testpass
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
+      - name: Create .env file
+        run: |
+          echo DB_NAME=quickbites_test >> .env
+          echo DB_USER=testuser >> .env
+          echo DB_PASSWORD=testpass >> .env
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-    - name: Wait for PostgreSQL
-      run: |
-        until pg_isready -h localhost -p 5432; do
-          echo "Waiting for postgres...";
-          sleep 3;
-        done
+      - name: Build Docker containers
+        run: docker-compose -f docker-compose.yml build
 
-    - name: Run migrations
-      run: |
-        python manage.py migrate
+      - name: Run containers
+        run: docker-compose -f docker-compose.yml up -d
 
-    - name: Run tests
-      run: |
-        python manage.py test
+      - name: Wait for DB to be healthy
+        run: |
+          echo "Waiting for DB to be ready..."
+          for i in {1..10}; do
+            docker exec Postgres_db pg_isready -U testuser -d quickbites_test && break
+            sleep 5
+          done
+
+      - name: Run Django migrations
+        run: docker exec QSR python manage.py migrate
+
+      - name: Run Django tests
+        run: docker exec QSR python manage.py test

@@ -16,7 +16,7 @@ hiredis==3.2.1
 inflection==0.5.1
 jsonschema==4.23.0
 jsonschema-specifications==2025.4.1
-psycopg2==2.9.10
+psycopg2-binary==2.9.10
 pycodestyle==2.13.0
 PyJWT==2.9.0
 python-dotenv==1.1.0
