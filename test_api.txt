@@ -1,0 +1,125 @@
+@baseUrl = http://127.0.0.1:8000
+
+### 👤 AUTH: Register a new user
+POST {{baseUrl}}/users/
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "email": "test@example.com",
+  "password": "testpassword",
+  "phone_number": "",
+  "address": ""
+}
+
+### 👤 GET all users 
+GET {{baseUrl}}/users/
+
+
+### 👤 GET a specific user
+@id = 6
+GET {{baseUrl}}/users/{{id}}/
+
+### 👤 AUTH: Get JWT token
+POST {{baseUrl}}/api/token/
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "testpassword"
+}
+
+### 🔁 Refresh access token
+POST {{baseUrl}}/api/token/refresh/
+Content-Type: application/json
+
+{
+  "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0ODQ5NzY3NCwianRpIjoiNTEwOWJiYTJmMDY3NDZiMGI0OWJiNzEwOGE2OTUxMGEiLCJ1c2VyX2lkIjo3fQ.FzT7iTmop6ld8yo8u4NScB3QBQThZjGzxicNh5E_pW8"
+}
+
+### 🔑 Set access token manually after login
+@authToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ4NDE0NjU0LCJqdGkiOiJhOGJlYmQ4MGI4MzE0MTFlOWU2MmE5YTU2ZDQ2ODA5OSIsInVzZXJfaWQiOjN9.U4Tyq8_QlIi4ETndpn2oO04wkGCKDwO8bd0cvDyueEg
+
+---
+
+### 🍽️ GET all menu items
+GET {{baseUrl}}/menu_items/
+Authorization: {{authToken}}
+
+### 🍽️ GET a specific menu item by ID
+@id = 1
+GET {{baseUrl}}/menu_items/{{id}}/
+Authorization: {{authToken}}
+
+### 🍽️ GET available menu items
+GET {{baseUrl}}/menu_items/available/
+Authorization: {{authToken}}
+
+### 🍽️ POST a new menu item (admin only)
+POST {{baseUrl}}/menu_items/
+Content-Type: application/json
+Authorization: {{authToken}}
+
+{
+  "name": "Vada Pav",
+  "price": 20.00,
+  "availability": true
+}
+
+### 🍽️ DELETE a menu item by ID (admin only)
+@id = 1
+DELETE {{baseUrl}}/menu_items/{{id}}/
+Authorization: {{authToken}}
+
+---
+
+### 🧾 GET all orders
+GET {{baseUrl}}/orders/
+Authorization: {{authToken}}
+
+### 🧾 GET orders by status
+GET {{baseUrl}}/orders/?status=completed
+Authorization: {{authToken}}
+
+### 🧾 POST a new order
+POST {{baseUrl}}/orders/
+Content-Type: application/json
+Authorization: {{authToken}}
+
+{
+  "status": "pending",
+  "order_items": [
+    {"menu_item": 1, "quantity": 2},
+    {"menu_item": 2, "quantity": 1}
+  ]
+}
+
+### 🧾 GET specific order details
+GET {{baseUrl}}/orders/d3dfe61a-d6a9-4707-9e3f-0bcc347bb874/
+Authorization: {{authToken}}
+
+### 🧾 PUT update order details
+PUT {{baseUrl}}/orders/d3dfe61a-d6a9-4707-9e3f-0bcc347bb874/
+Content-Type: application/json
+Authorization: {{authToken}}
+
+{
+  "status": "completed"
+}
+
+### 🧾 DELETE an order
+DELETE {{baseUrl}}/orders/d3dfe61a-d6a9-4707-9e3f-0bcc347bb874/
+Authorization: {{authToken}}
+
+### 📊 GET average daily sales (last 4 weekdays)
+GET {{baseUrl}}/orders/average-daily-sales/
+Authorization: {{authToken}}
+
+---
+
+### 📦 GET all order items
+GET {{baseUrl}}/order_items/
+Authorization: {{authToken}}
+
+---
+
