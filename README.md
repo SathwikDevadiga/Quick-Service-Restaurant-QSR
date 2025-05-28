@@ -76,8 +76,8 @@ Use it to:
 | GET    | /menu_items/           | List all menu items            |
 | GET    | /menu_items/{id}/      | Retrieve a specific menu item  |
 | GET    | /menu_items/available/ | List available menu items only |
-| POST   | /menu_items/           | Create menu items              |
-| DELETE | /menu_items/{id}/      | Delete a specific menu item    |
+| POST   | /menu_items/           | Create menu items (admin only) |
+| DELETE | /menu_items/{id}/      | Delete a specific menu item  (admin only) |
 
 #### 🔁 Sample Payload:
 
@@ -98,9 +98,9 @@ Use it to:
 | GET    | /orders/                     | List all orders                         |
 | GET    | /orders/?status=pending      | Filter orders by status                 |
 | POST   | /orders/                     | Place a new order                       |
-| GET    | /orders/{id}/                | Retrieve order details                  |
-| PUT    | /orders/{id}/                | Update order details                    |
-| DELETE | /orders/{id}/                | Delete order                            |
+| GET    | /orders/{uuid}/                | Retrieve order details                  |
+| PUT    | /orders/{uuid}/                | Update order details                    |
+| DELETE | /orders/{uuid}/                | Delete order                            |
 | GET    | /orders/average-daily-sales/ | Daily average revenue (last 4 weekdays) |
 
 #### 🔁 Place Order Sample Payload:
@@ -125,15 +125,15 @@ Use it to:
 
 ---
 
-## 👤 User Authentication & Management (`/auth/`)
+## 👤 User Authentication & Management 
 
 | Method | Endpoint                 | Description                         |
 | ------ | ------------------------ | ----------------------------------- |
-| GET    | /auth/                   | List all users (admin only)         |
-| POST   | /auth/                   | Create user                         |
-| GET    | /auth/{id}/              | Retrieve a specific user            |
-| POST   | /auth/api/token/         | Obtain JWT access and refresh token |
-| POST   | /auth/api/token/refresh/ | Refresh JWT access token            |
+| GET    | /users/                   | List all users (admin only)         |
+| POST   | /users/                   | Create user                         |
+| GET    | /users/{id}/              | Retrieve a specific user            |
+| POST   | /api/token/               | Obtain JWT access and refresh token |
+| POST   | /api/token/refresh/       | Refresh JWT access token            |
 
 ---
 
