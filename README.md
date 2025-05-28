@@ -69,6 +69,8 @@ Use it to:
 
 ## 📖 API Endpoints
 
+* Note : Use test_api file for testing, Download Rest Client extension in VScode
+
 ### 🍽️ Menu Items (`/menu_items/`)
 
 | Method | Endpoint                | Description                    |
