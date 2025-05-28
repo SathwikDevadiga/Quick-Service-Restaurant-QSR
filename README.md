@@ -129,8 +129,8 @@ Use it to:
 
 | Method | Endpoint                 | Description                         |
 | ------ | ------------------------ | ----------------------------------- |
-| GET    | /auth/                   | List all users (admin only)         |
-| POST   | /auth/                   | Create user                         |
+| GET    | /user/                   | List all users (admin only)         |
+| POST   | /user/                   | Create user                         |
 | GET    | /auth/{id}/              | Retrieve a specific user            |
 | POST   | /auth/api/token/         | Obtain JWT access and refresh token |
 | POST   | /auth/api/token/refresh/ | Refresh JWT access token            |
